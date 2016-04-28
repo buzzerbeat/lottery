@@ -1,10 +1,22 @@
 <ion-view title="投注" hide-tabs="true">
   <ion-content>
-    <h5 class="padding-left center">
-      第{{period}}期
-    </h5>
+    <div class="row row-center bar-top">
+
+      <div class="col text-right">
+        <button class="button disabled button-small button-outline ">
+          摇一摇
+        </button>
+      </div>
+      <div class="col text-center">
+         第{{period}}期
+      </div>
+      <div class="col">
+
+      </div>
+    </div>
+
     <div class="padding-left">
-      <h5>红球号码<span class="padding-left text-small">至少选择5个号码</span><span class="ion-android-phone-portrait padding-left"/></h5>
+      <h5>红球号码<span class="padding-left text-small">选择6个红球</span><span class="ion-android-phone-portrait padding-left"/></h5>
     </div>
 
     <div class="row" ng-repeat="rows in reds">
@@ -15,7 +27,7 @@
     </div>
 
     <div class="padding-left">
-      <h5>蓝球号码<span class="padding-left text-small">至少选择2个号码</span><span class="ion-android-phone-portrait padding-left"/></h5>
+      <h5>蓝球号码<span class="padding-left text-small">选择1个蓝球</span><span class="ion-android-phone-portrait padding-left"/></h5>
     </div>
 
     <div class="row" ng-repeat="rows in blues">

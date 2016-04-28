@@ -76,6 +76,13 @@ span.circle-text-small {
   /*height: 70px;*/
 }
 
+.bar-top{
+  bottom: 0;
+  width: 100%;
+  border-bottom: 1px solid lightgray;
+  /*height: 70px;*/
+}
+
 
 
 

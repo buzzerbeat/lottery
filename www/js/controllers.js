@@ -1,17 +1,44 @@
 angular.module('starter.controllers', ['ionic', 'ngResource', 'LocalForageModule'])
 
-  .controller('DashCtrl', function ($scope, UserApi, params, Picks) {
-    UserApi.get(params.BASE_URL + 'init', {}, function (response) {
-      console.log(JSON.stringify(response.data));
-      $scope.username = response.data.user.username;
-      $scope.points = response.data.user.points;
-      Picks.current_period = response.data.period.current.period;
-      // $scope.peri = response.data.user.points;
-    }, function (response) {
-      console.log('error');
-      console.log(response);
-      console.log(JSON.stringify(response.data));
+  .controller('DashCtrl', function ($scope, UserApi, params, Picks, $localForage, $http) {
+    $localForage.getItem('authKey').then(function (token) {
+      if (!token) {
+        console.log('request register');
+        var config = {
+          "Content-Type": "application/json"
+        };
+        $http.post(params.BASE_URL + '/user/register', JSON.stringify({'uuid': $scope.deviceId}), config).then(function (response) {
+          console.log(response.status);
+          console.log(JSON.stringify(response.data));
+          $window.sessionStorage.access_token = response.data.user.auth_key;
+          $scope.token = $window.sessionStorage.access_token;
+          $localForage.setItem('authKey',response.data.user.auth_key).then(function(err) {
+            console(err);
+            getUserInfo();
+          });
+        }, function (response) {
+          alert('设备注册异常');
+        });
+      } else {
+        getUserInfo();
+      }
     });
+
+    function getUserInfo() {
+      console.log('getUserInfo');
+      UserApi.get(params.BASE_URL + 'init', {}, function (response) {
+        console.log(JSON.stringify(response.data));
+        $scope.username = response.data.user.username;
+        $scope.points = response.data.user.points;
+        Picks.current_period = response.data.period.current.period;
+        // $scope.peri = response.data.user.points;
+      }, function (response) {
+        console.log('error');
+        console.log(response);
+        console.log(JSON.stringify(response.data));
+      });
+    }
+
   })
 
   .controller('ChatsCtrl', function ($scope, Chats) {
@@ -308,7 +335,7 @@ angular.module('starter.controllers', ['ionic', 'ngResource', 'LocalForageModule
       var config = {
         "Content-Type": "application/json"
       };
-      $http.post('http://qy1.appcq.cn:8087/user/register', JSON.stringify({'uuid': $scope.deviceId}), config).then(function (response) {
+      $http.post(params.BASE_URL + '/user/register', JSON.stringify({'uuid': $scope.deviceId}), config).then(function (response) {
         // this callback will be called asynchronously
         // when the response is available
         console.log(response.status);
