@@ -1,0 +1,47 @@
+<ion-view title="投注" hide-tabs="true">
+  <ion-content>
+    <h5 class="padding-left center">
+      第{{period}}期
+    </h5>
+    <div class="padding-left">
+      <h5>红球号码<span class="padding-left text-small">至少选择5个号码</span><span class="ion-android-phone-portrait padding-left"/></h5>
+    </div>
+
+    <div class="row" ng-repeat="rows in reds">
+      <div class="col" ng-repeat="column in rows">
+        <span ng-class="{'red-dark':!inArray(column, selectedReds), 'red-light':inArray(column, selectedReds)}" class="center circle-text" data="{{column}}" ng-if="column <= 35" ng-click="redToggle(column)">{{column}}</span>
+      </div>
+
+    </div>
+
+    <div class="padding-left">
+      <h5>蓝球号码<span class="padding-left text-small">至少选择2个号码</span><span class="ion-android-phone-portrait padding-left"/></h5>
+    </div>
+
+    <div class="row" ng-repeat="rows in blues">
+      <div class="col" ng-repeat="column in rows">
+        <span ng-class="{'blue-dark':!inArray(column, selectedBlues), 'blue-light':inArray(column, selectedBlues)}" class="center circle-text" data="{{column}}" ng-if="column <= 12" ng-click="blueToggle(column)">{{column}}</span>
+      </div>
+
+    </div>
+
+
+  </ion-content>
+  <div class="row fixed-bottom row-center">
+    <div class="col">
+      <button class="button button-small button-stable button-outline padding-right padding-left" ng-click="randomSelected()">
+        机 选
+      </button>
+    </div>
+    <div class="col text-center">
+      <span class="text-dark">本期已投2注</span>
+    </div>
+    <div class="col text-right">
+      <button class="button button-small button-positive button-outline padding-right padding-left" ng-click="submitPick()">
+        确 定
+      </button>
+    </div>
+  </div>
+
+</ion-view>
+

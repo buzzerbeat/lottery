@@ -1,0 +1,36 @@
+<ion-view title="开奖" hide-tabs="true">
+  <ion-content>
+    <ion-list>
+      <ion-item class="item-remove-animate item-icon-right" ng-repeat="history in historyData"  href="#/tab/chats/{{chat.id}}">
+        <div class="row">
+          <div class="col">
+            <span class="red-dark center circle-text" data="{{history.drawResult.red_1st}}">{{history.drawResult.red_1st}}</span>
+          </div>
+          <div class="col">
+            <span class="red-dark center circle-text" data="{{history.drawResult.red_2nd}}">{{history.drawResult.red_2nd}}</span>
+          </div>
+          <div class="col">
+            <span class="red-dark center circle-text" data="{{history.drawResult.red_3rd}}">{{history.drawResult.red_3rd}}</span>
+          </div>
+          <div class="col">
+            <span class="red-dark center circle-text" data="{{history.drawResult.red_4th}}">{{history.drawResult.red_4th}}</span>
+          </div>
+          <div class="col">
+            <span class="red-dark center circle-text" data="{{history.drawResult.red_5th}}">{{history.drawResult.red_5th}}</span>
+          </div>
+          <div class="col">
+            <span class="red-dark center circle-text" data="{{history.drawResult.red_6th}}">{{history.drawResult.red_6th}}</span>
+          </div>
+
+          <div class="col">
+            <span class="blue-dark center circle-text" data="{{history.drawResult.blue_1st}}">{{history.drawResult.blue_1st}}</span>
+          </div>
+        </div>
+        <p>{{history.periodDesc}}</p>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+
+
+      </ion-item>
+    </ion-list>
+    </ion-content>
+  </ion-view>

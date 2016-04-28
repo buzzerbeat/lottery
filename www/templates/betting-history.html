@@ -1,0 +1,20 @@
+<ion-view title="历史" hide-tabs="true">
+  <ion-content>
+    <ion-list>
+    <ion-item class="my-item"
+              ng-repeat="item in bettings"
+              ng-class="{'item-divider': item.isPeriod, 'item-icon-right' : !item.isPeriod}">
+
+    <div class='row' ng-if="!item.isPeriod" >
+      <div class="col" ng-repeat="number in item.numbers track by $index">
+        <span ng-class="{'blue-dark':$last, 'red-dark':!$last}" class=" center circle-text" >{{number}}</span>
+      </div>
+    </div>
+    <span class="text-small text-dark" ng-if="!item.isPeriod">{{item.pickTimeDesc}} 投注</span>
+    <h2 ng-if="item.isPeriod">{{item.period}}<span class="padding-left text-small">每二,五,日21:15开奖</span></h2>
+    <i ng-if="!item.isPeriod" class="icon ion-chevron-right icon-accessory"></i>
+    </ion-item>
+    </ion-list>
+
+  </ion-content>
+</ion-view>
