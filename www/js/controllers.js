@@ -1,28 +1,56 @@
 angular.module('starter.controllers', ['ionic', 'ngResource', 'LocalForageModule'])
 
-  .controller('DashCtrl', function ($scope, UserApi, params, Picks, $localForage, $http) {
-    $localForage.getItem('authKey').then(function (token) {
-      if (!token) {
-        console.log('request register');
-        var config = {
-          "Content-Type": "application/json"
-        };
-        $http.post(params.BASE_URL + '/user/register', JSON.stringify({'uuid': $scope.deviceId}), config).then(function (response) {
-          console.log(response.status);
-          console.log(JSON.stringify(response.data));
-          $window.sessionStorage.access_token = response.data.user.auth_key;
-          $scope.token = $window.sessionStorage.access_token;
-          $localForage.setItem('authKey',response.data.user.auth_key).then(function(err) {
-            console(err);
-            getUserInfo();
+  .controller('DashCtrl', function ($scope, UserApi, params, Picks, $localForage, $http, $cordovaDeviceMotion, $window) {
+//     // watch Acceleration options
+//     var onShake = function () {
+//       // Fired when a shake is detected
+//     };
+//
+//     var onError = function () {
+//       // Fired when there is an accelerometer error (optional)
+//     };
+//
+// // Start watching for shake gestures and call "onShake"
+// // with a shake sensitivity of 40 (optional, default 30)
+//     shake.startWatch(onShake, 40 /*, onError */);
+//
+// // Stop watching for shake gestures
+//     shake.stopWatch();
+    document.addEventListener("deviceready", function () {
+      console.log(device.uuid);
+      $scope.deviceId = device.uuid;
+
+      $localForage.getItem('authKey').then(function (token) {
+        if (!token) {
+          console.log('request register');
+          var config = {
+            "Content-Type": "application/json"
+          };
+          $http.post(params.BASE_URL + 'user/register', {'uuid': $scope.deviceId}, config).then(function (response) {
+            console.log(response.status);
+            console.log(JSON.stringify(response.data));
+            if (response.data.status == 0) {
+              $localForage.setItem('authKey', response.data.user.auth_key).then(function (err) {
+                console(err);
+                getUserInfo();
+              });
+            } else {
+              console.log(response.data.message);
+              alert('设备注册失败：' + response.data.message);
+            }
+          }, function (response) {
+            console.log(response.status);
+            console.log(JSON.stringify(response.data));
+            alert('设备注册异常');
           });
-        }, function (response) {
-          alert('设备注册异常');
-        });
-      } else {
-        getUserInfo();
-      }
-    });
+        } else {
+          getUserInfo();
+        }
+      });
+    }, false);
+
+
+
 
     function getUserInfo() {
       console.log('getUserInfo');
