@@ -18,7 +18,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       }
       if (window.StatusBar) {
         // org.apache.cordova.statusbar required
-        StatusBar.style(1);
+        StatusBar.styleLightContent();
       }
     });
   })
@@ -67,6 +67,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
           'tab-dash': {
             templateUrl: 'templates/award-history.html',
             controller: 'HistoryCtrl'
+          }
+        }
+
+      })
+
+      .state('tab.webview', {
+        url: '/webview',
+        views: {
+          'tab-dash': {
+            templateUrl: 'templates/webview.html',
+            controller: 'WebviewCtrl'
           }
         }
 
@@ -126,6 +137,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/tab/dash');
     $ionicConfigProvider.tabs.position('bottom');
+    $ionicConfigProvider.views.swipeBackEnabled(false);
 
   })
 

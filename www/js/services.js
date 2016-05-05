@@ -49,8 +49,29 @@ angular.module('starter.services', [])
     };
   })
 
+  .factory("WebviewService", function () {
+    var link = "";
+    var title = "";
+    return {
+      setLink: function (param) {
+        link = param;
+      },
+      getLink: function () {
+        return link;
+      },
+      setTitle: function (param) {
+        title = param;
+      },
+      getTitle: function () {
+        return title;
+      }
+    };
+
+
+  })
   .factory("UserApi", function (params, $http, $window, $resource, $localForage) {
     return {
+      user:false,
       post:function (url, data, successCallback, failCallback) {
         $localForage.getItem('authKey').then(function (token) {
           console.log(token);
@@ -71,6 +92,8 @@ angular.module('starter.services', [])
       },
       get:function (url, data, successCallback, failCallback) {
         $localForage.getItem('authKey').then(function (token) {
+          console.log('token');
+          console.log(token);
           // if (data)
           var req = {
             method: 'GET',
@@ -80,7 +103,8 @@ angular.module('starter.services', [])
               "Authorization": "Bearer " + token
             },
             data: data
-          }
+          };
+
           $http(req).then(successCallback, failCallback);
         })
       },
@@ -119,6 +143,7 @@ angular.module('starter.services', [])
   .factory("Picks", function () {
     return {
       current_period:'',
+      endtime:0,
       init_red: function () {
         var input = [];
         var tmp = [];

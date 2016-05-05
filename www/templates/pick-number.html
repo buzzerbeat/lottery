@@ -1,21 +1,19 @@
 <ion-view title="投注" hide-tabs="true">
   <ion-content>
-    <div class="row row-center bar-top">
+    <div class="row bar-top">
 
       <div class="col text-right">
-        <button class="button disabled button-small button-outline ">
+        <span class="text-border text-dark text-small">
           摇一摇
-        </button>
+        </span>
       </div>
-      <div class="col text-center">
-         第{{period}}期
+      <div class="col-75 col text-left padding-left">
+         {{'第' + period + '期 离截止' + endtime }}
       </div>
-      <div class="col">
 
-      </div>
     </div>
 
-    <div class="padding-left">
+    <div class="padding-top padding-left">
       <h5>红球号码<span class="padding-left text-small">选择6个红球</span><span class="ion-android-phone-portrait padding-left"/></h5>
     </div>
 
@@ -46,7 +44,7 @@
       </button>
     </div>
     <div class="col text-center">
-      <span class="text-dark">本期已投2注</span>
+      <span class="text-dark"></span>
     </div>
     <div class="col text-right">
       <button class="button button-small button-positive button-outline padding-right padding-left" ng-click="submitPick()">

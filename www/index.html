@@ -11,7 +11,9 @@
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
     <link href="css/ionic.app.css" rel="stylesheet">
     -->
+    <meta name="format-detection" content="telephone=no">
 
+    <meta http-equiv="Content-Security-Policy" content="default-src *; script-src 'self' 'unsafe-inline' 'unsafe-eval' *; style-src  'self' 'unsafe-inline' *">
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
 
@@ -19,6 +21,7 @@
     <script src="cordova.js"></script>
     <script src="lib/angular-resource/angular-resource.min.js"></script>
     <script src="lib/ngCordova/dist/ng-cordova.js"></script>
+    <script src="lib/datejs/date-zh-CN.js"></script>
     <script src="lib/localforage/dist/localforage.min.js"></script>
     <script src="lib/angular-localforage/dist/angular-localForage.min.js"></script>
     <!-- your app's js -->
@@ -27,7 +30,7 @@
     <script src="js/services.js"></script>
     <script src="js/directives.js"></script>
   </head>
-  <body ng-app="starter">
+  <body ng-app="starter" >
     <!--
       The nav bar that will be updated as we navigate between views.
     -->
@@ -35,6 +38,13 @@
     <ion-nav-bar class="bar-positive">
       <ion-nav-back-button>
       </ion-nav-back-button>
+      <ion-nav-buttons side="right">
+        <button class="button" ng-click="sign()" ng-controller="DashCtrl" >
+          {{allowSign ? '签到' : isLogin ? points + '分' + hideSign : ''}}
+          <!--{{allowSign;console() }}-->
+          </button>
+        </button>
+      </ion-nav-buttons>
     </ion-nav-bar>
     <!--
       The views will be rendered in the <ion-nav-view> directive below
