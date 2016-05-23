@@ -21,26 +21,7 @@ angular.module('starter.controllers', ['ionic', 'ngResource', 'LocalForageModule
   })
   .controller('DashCtrl', function ($scope, UserApi, params, Picks, $localForage, $http,
                                     $window, Basic, $filter, $ionicSlideBoxDelegate, WebviewService, $ionicPlatform ) {
-//     // watch Acceleration options
-//     var onShake = function () {
-//       // Fired when a shake is detected
-//     };
-//
-//     var onError = function () {
-//       // Fired when there is an accelerometer error (optional)
-//     };
-//
-// // Start watching for shake gestures and call "onShake"
-// // with a shake sensitivity of 40 (optional, default 30)
-//     shake.startWatch(onShake, 40 /*, onError */);
-//
-// // Stop watching for shake gestures
-//     shake.stopWatch();
-//     if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry)/)) {
 
-      // document.addEventListener("deviceready", function () {
-      //
-      // }, false);
     $ionicPlatform.ready(function () {
 
       console.log(device.uuid);
